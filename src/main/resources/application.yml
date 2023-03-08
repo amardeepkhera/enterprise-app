@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://mongodb-dev:IhKboNh1Y5PMq4zL@cluster0.vhy3t.mongodb.net/sample_airbnb?retryWrites=true&w=majority
+      uri: ${MONGODB_URI}
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/postgres
     username: postgres
