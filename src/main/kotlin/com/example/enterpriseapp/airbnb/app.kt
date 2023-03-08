@@ -13,6 +13,7 @@ import org.apache.kafka.common.config.SaslConfigs.SASL_JAAS_CONFIG
 import org.apache.kafka.common.config.SaslConfigs.SASL_MECHANISM
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.kafka.common.serialization.StringSerializer
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.cloud.sleuth.instrument.kafka.TracingKafkaConsumerFactory
 import org.springframework.cloud.sleuth.instrument.kafka.TracingKafkaProducerFactory
 import org.springframework.context.annotation.Bean
@@ -46,7 +47,7 @@ import javax.annotation.PreDestroy
 
 
 @Configuration
-class MessagingConfig {
+class MessagingConfig(@Value("\${KAFKA_PASSWORD}") private val kafkaPassword: String) {
 
     private val logger = KotlinLogging.logger { }
 
@@ -57,7 +58,7 @@ class MessagingConfig {
         GROUP_ID_CONFIG to "application-consumer",
         SECURITY_PROTOCOL_CONFIG to "SASL_SSL",
         SASL_MECHANISM to "PLAIN",
-        SASL_JAAS_CONFIG to "org.apache.kafka.common.security.plain.PlainLoginModule   required username='TLNXGQIX5OBCGIR7'   password='V5rxNzoXbbeqQzGh+y6bFzlSkFpQRue687Q9Mf7e5u6UhuyfVT5gYd6NuZ+DxuVV';"
+        SASL_JAAS_CONFIG to "org.apache.kafka.common.security.plain.PlainLoginModule   required username='TLNXGQIX5OBCGIR7'   password='$kafkaPassword';"
     )
 
     private fun receiverOptions() = ReceiverOptions.create<String, String>(consumerProperties())

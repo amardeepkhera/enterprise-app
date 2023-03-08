@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication
 @EnableCaching
-@ComponentScan("com.example.enterpriseapp.postgres_partition")
+@ComponentScan("com.example.enterpriseapp.airbnb")
 class EnterpriseAppApplication
 
 fun main(args: Array<String>) {
