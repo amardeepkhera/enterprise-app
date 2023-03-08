@@ -40,6 +40,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-sleuth:3.1.2")
     implementation("io.projectreactor.kafka:reactor-kafka:1.3.11")
     implementation("org.springframework.kafka:spring-kafka:2.8.6")
+    implementation ("io.confluent:kafka-avro-serializer:5.3.0")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("org.glassfish.jaxb:jaxb-runtime:3.0.2")
     implementation("com.nimbusds:nimbus-jose-jwt:9.23")
