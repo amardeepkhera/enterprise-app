@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: ${MONGODB_URI}
+      uri: ${MONGODB_URI:mongodb+srv://mongodb-dev:abcd@cluster0.we.mongodb.net/sample_airbnb?retryWrites=true&w=majority}
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/postgres
     username: postgres
@@ -14,8 +14,23 @@ logging:
  level:
    org.springframework.data.mongodb.repository: debug
    org.springframework.cloud.sleuth: DEBUG
+   org.mongodb.*: off
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+resilience4j:
+  circuitbreaker:
+#    instances:
+#      processPayment:
+#        slidingWindowSize: 2
+#        minimumNumberOfCalls: 1
+#        slidingWindowType: COUNT_BASED
+#        #waitDurationInOpenState: 5
+#        registerHealthIndicator: true
+#        #register-health-indicator: true
+#        allowHealthIndicatorToFail: true
+    configs:
+      default:
+        registerHealthIndicator: true

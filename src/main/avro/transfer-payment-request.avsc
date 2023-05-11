@@ -1,0 +1,25 @@
+{
+    "type": "record",
+    "name": "TransferPaymentRequest",
+    "namespace": "com.example.enterpriseapp.event_driven.message",
+    "version": "1",
+    "fields": [
+    {
+        "name": "id",
+        "type": "string"
+    },
+    {
+        "name": "fromAccount",
+        "type": "string"
+    },
+    {
+        "name": "toAccount",
+        "type": "string"
+    },
+    {
+            "name": "amount",
+            "type": "double"
+        }
+
+    ]
+}

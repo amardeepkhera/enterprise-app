@@ -1,0 +1,22 @@
+{
+    "type": "record",
+    "name": "ValidateTransferPaymentResponse",
+    "namespace": "com.example.enterpriseapp.event_driven.message",
+    "version": "1",
+    "fields": [
+    {
+        "name": "id",
+        "type": "string"
+    },
+    {
+        "name": "isValid",
+        "type": "boolean"
+    },
+    {
+        "name": "message",
+        "type": ["null","string"],
+        "default": null
+    }
+
+    ]
+}

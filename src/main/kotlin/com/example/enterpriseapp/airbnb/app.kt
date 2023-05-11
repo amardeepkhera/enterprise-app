@@ -47,12 +47,15 @@ import javax.annotation.PreDestroy
 
 
 @Configuration
-class MessagingConfig(@Value("\${KAFKA_PASSWORD}") private val kafkaPassword: String) {
+class MessagingConfig(
+    @Value("\${KAFKA_BOOTSTRAP_SERVERS}") private val kafkaBootstrapServers: String,
+    @Value("\${KAFKA_PASSWORD}") private val kafkaPassword: String
+) {
 
     private val logger = KotlinLogging.logger { }
 
     private fun consumerProperties() = mapOf(
-        BOOTSTRAP_SERVERS_CONFIG to "pkc-ymrq7.us-east-2.aws.confluent.cloud:9092",
+        BOOTSTRAP_SERVERS_CONFIG to kafkaBootstrapServers,
         KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java.name,
         VALUE_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java.name,
         GROUP_ID_CONFIG to "application-consumer",
@@ -71,12 +74,12 @@ class MessagingConfig(@Value("\${KAFKA_PASSWORD}") private val kafkaPassword: St
     fun reactiveKafkaConsumer(t: TracingKafkaConsumerFactory) = KafkaReceiver.create(t, receiverOptions())
 
     private fun senderProperties() = mapOf(
-        ProducerConfig.BOOTSTRAP_SERVERS_CONFIG to "pkc-ymrq7.us-east-2.aws.confluent.cloud:9092",
+        ProducerConfig.BOOTSTRAP_SERVERS_CONFIG to kafkaBootstrapServers,
         ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG to StringSerializer::class.java.name,
         ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG to StringSerializer::class.java.name,
         SECURITY_PROTOCOL_CONFIG to "SASL_SSL",
         SASL_MECHANISM to "PLAIN",
-        SASL_JAAS_CONFIG to "org.apache.kafka.common.security.plain.PlainLoginModule   required username='TLNXGQIX5OBCGIR7'   password='V5rxNzoXbbeqQzGh+y6bFzlSkFpQRue687Q9Mf7e5u6UhuyfVT5gYd6NuZ+DxuVV';"
+        SASL_JAAS_CONFIG to "org.apache.kafka.common.security.plain.PlainLoginModule   required username='TLNXGQIX5OBCGIR7'   password='$kafkaPassword';"
     )
 
     private fun senderOptions() = SenderOptions.create<String, String>(senderProperties())

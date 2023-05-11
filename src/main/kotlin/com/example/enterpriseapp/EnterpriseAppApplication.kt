@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication
 @EnableCaching
-@ComponentScan("com.example.enterpriseapp.airbnb")
+@ComponentScan("com.example.enterpriseapp.payment")
 class EnterpriseAppApplication
 
 fun main(args: Array<String>) {
